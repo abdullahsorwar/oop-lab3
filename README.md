@@ -1,26 +1,25 @@
-# OOP Lab 3 
+# OOP Lab 3
 
-This lab contains **7 problems**. Each problem involves implementing specific object-oriented programming concepts using Java. You will complete the provided skeleton classes by filling in the required methods.
+This lab contains seven self-check problems that reinforce core object-oriented programming concepts in Java. Each problem ships with starter code; complete the missing logic so the provided tests pass.
 
-The problems are:
-- **Gradebook:** Manage students and their subject marks, compute averages, and track highest and lowest scores.
-- **Parking Lot with polymorphic Vehicle rates:** Simulate a parking lot with different vehicle types and calculate parking fees.
-- **Shopping Cart with discounts:** Implement a shopping cart that handles products, supports discounts, and calculates total cost.
-- **Employee Management:** Model employees including managers and interns, handle payments, and apply raises.
-- **Library with nested Borrower class:** Manage books and borrowing information using nested classes.
-- **Banking with static counters + transfers:** Implement bank accounts with deposit, withdrawal, and transfer functionalities, tracking total accounts.
-- **Zoo with abstract Animal and polymorphic behaviors:** Model animals with different sounds and ages, and manage a collection of animals.
+## Problem Overview
+
+1. **Gradebook** – Manage students, subject marks, averages, and top performers.
+2. **Parking Lot** – Track polymorphic vehicle rates, occupancy, and revenue.
+3. **Shopping Cart** – Handle products, discounts, and cart totals.
+4. **Employees** – Model managers and interns, apply raises, and find the highest-paid employee.
+5. **Library** – Manage books, nested borrower data, and active loans.
+6. **Banking** – Support deposits, withdrawals, transfers, and account counters.
+7. **Zoo** – Use an abstract animal hierarchy with polymorphic behaviors.
 
 ---
 
 ### 1. Student Gradebook
 
-This problem requires you to design a system to manage students and their marks in various subjects. You will create a `Student` class to store individual student data and a `Gradebook` class to manage a collection of students, compute averages, and identify top performers.
+Design a gradebook that stores student records, calculates averages, and surfaces highest/lowest subject marks.
 
-Method Signatures:
-
-Student
-
+```java
+// Student.java
 public class Student {
     public Student(String id, String name);
     public void addSubjectMark(String subject, int mark);
@@ -29,28 +28,26 @@ public class Student {
     public String lowestSubject();
     public String getId();
     public String getName();
-    public java.util.Map<String,Integer> getMarksView();
+    public java.util.Map<String, Integer> getMarksView();
 }
 
-Gradebook
-
+// Gradebook.java
 public class Gradebook {
     public void addStudent(Student s);
     public Student findById(String id);
     public double classAverage();
     public java.util.ArrayList<Student> topK(int k);
 }
+```
 
 ---
 
 ### 2. Smart Parking Lot Simulation
 
-In this problem, you will simulate a parking lot system that handles different types of vehicles. Each vehicle type has its own hourly rate. The parking lot should manage vehicle entry and exit, calculate fees based on parking duration, and track total revenue and occupancy.
+Simulate a parking lot with vehicle-specific rates. Manage vehicle entry/exit, compute fees by duration, and track occupancy plus revenue.
 
-Method Signatures:
-
-Vehicle (superclass)
-
+```java
+// Vehicle.java
 public abstract class Vehicle {
     public Vehicle(String plate, long entryTime);
     public String getPlate();
@@ -58,31 +55,28 @@ public abstract class Vehicle {
     public abstract double ratePerHour();
 }
 
-Subclasses
+// Car.java, Bike.java, Truck.java
+public class Car extends Vehicle { /* ... */ }
+public class Bike extends Vehicle { /* ... */ }
+public class Truck extends Vehicle { /* ... */ }
 
-public class Car extends Vehicle { ... }
-public class Bike extends Vehicle { ... }
-public class Truck extends Vehicle { ... }
-
-ParkingLot
-
+// ParkingLot.java
 public class ParkingLot {
     public boolean park(Vehicle v);
     public double leave(String plate, long exitTime);
     public double getRevenue();
     public int getOccupancy();
 }
+```
 
 ---
 
 ### 3. Online Shopping Cart
 
-This problem involves implementing a shopping cart system that can add and remove products, apply discounts, and calculate the total cost. You will manage products with their details and handle operations on the cart.
+Implement a cart that stores products, supports optional discounts, and reports the total cost.
 
-Method Signatures:
-
-Product
-
+```java
+// Product.java
 public class Product {
     public Product(int id, String name, double price);
     public int getId();
@@ -90,8 +84,7 @@ public class Product {
     public double getPrice();
 }
 
-ShoppingCart
-
+// ShoppingCart.java
 public class ShoppingCart {
     public void addProduct(Product p);
     public boolean removeProductById(int id);
@@ -99,19 +92,18 @@ public class ShoppingCart {
     public double getTotalCost();
     public int size();
 }
+```
 
-(Optional: add a Customer class that owns a ShoppingCart.)
+*(Optional: introduce a `Customer` class that owns a `ShoppingCart`.)*
 
 ---
 
 ### 4. Employee Management with Inheritance
 
-You will model an employee management system with different types of employees, such as managers and interns. Each employee has an ID, name, and payment details. The system should support raising salaries and identifying the highest-paid employee.
+Model a company that stores employees, differentiates managers and interns, applies raises, and finds the highest-paid employee.
 
-Method Signatures:
-
-Employee (abstract)
-
+```java
+// Employee.java
 public abstract class Employee {
     public Employee(String id, String name);
     public String getId();
@@ -120,30 +112,27 @@ public abstract class Employee {
     public void raiseByPercent(double pct);
 }
 
-Subclasses
+// Manager.java, Intern.java
+public class Manager extends Employee { /* ... */ }
+public class Intern extends Employee { /* ... */ }
 
-public class Manager extends Employee { ... }
-public class Intern extends Employee { ... }
-
-Company
-
+// Company.java
 public class Company {
     public void add(Employee e);
     public Employee richest();
     public void raiseAll(double pct);
     public int size();
 }
+```
 
 ---
 
 ### 5. Library System with Nested Class
 
-In this problem, you will implement a library system that manages books and their borrowing status. Each book can have a nested `Borrower` class to store the borrower's name and borrowing date. The library should track borrowed books and support searching by title.
+Track books, borrowers, and loan status using a nested `Borrower` type. Support lookups by title and list active loans.
 
-Method Signatures:
-
-Book
-
+```java
+// Book.java
 public class Book {
     public class Borrower {
         public Borrower(String name, String date);
@@ -160,24 +149,22 @@ public class Book {
     public String getAuthor();
 }
 
-Library
-
+// Library.java
 public class Library {
     public void add(Book b);
     public Book findByTitle(String title);
     public java.util.ArrayList<Book> borrowedBooks();
 }
+```
 
 ---
 
 ### 6. Banking System with Static Variables
 
-This problem focuses on implementing bank accounts that support deposits, withdrawals, and transfers. The system should also keep track of the total number of bank accounts created using static variables.
+Implement bank accounts that support common transactions and maintain a static counter for total accounts created.
 
-Method Signatures:
-
-BankAccount
-
+```java
+// BankAccount.java
 public class BankAccount {
     public BankAccount(int accountNumber, String holderName, double openingBalance);
     public void deposit(double amount);
@@ -186,17 +173,16 @@ public class BankAccount {
     public static int getTotalAccounts();
     public double getBalance();
 }
+```
 
 ---
 
 ### 7. Zoo Simulation with Abstract Class
 
-You will create a zoo simulation with an abstract `Animal` class and specific animal subclasses. Each animal has a name, age, and a unique sound. The zoo manages a collection of animals, supports feeding all animals, and can identify the oldest animal.
+Build a zoo that uses an abstract animal hierarchy. Each animal announces its sound, tracks its age, and the zoo can feed and query the collection.
 
-Method Signatures:
-
-Animal (abstract) + subclasses
-
+```java
+// Animal.java and subclasses
 public abstract class Animal {
     public Animal(String name, int age);
     public String getName();
@@ -204,32 +190,32 @@ public abstract class Animal {
     public abstract String makeSound();
 }
 
-public class Lion extends Animal { ... }
-public class Elephant extends Animal { ... }
-public class Monkey extends Animal { ... }
+public class Lion extends Animal { /* ... */ }
+public class Elephant extends Animal { /* ... */ }
+public class Monkey extends Animal { /* ... */ }
 
-Zoo
-
+// Zoo.java
 public class Zoo {
     public void add(Animal a);
     public void feedAll();
     public Animal oldest();
     public int size();
 }
+```
 
 ---
 
-## How to Run
-Example for Problem 1:
+## How to Run Tests
+
 ```bash
 cd Problem1_Gradebook
 javac *.java
 java Problem1Test
+```
 
-Repeat for Problem2Test, Problem3Test, … up to Problem7Test.
+Repeat for `Problem2Test` through `Problem7Test` in their respective folders.
 
-
-- Run the test for each problem (java ProblemXTest).
-- Skeletons compile but many tests will **fail** until you implement the TODOs.
-- If all tests show PASS and the summary prints ✅ All tests passed!, your solution is correct.
-- Submit your code along with the PASS outputs.
+- Run each `ProblemXTest` class.
+- Skeletons compile, but tests will fail until you finish the TODOs.
+- Aim for every test to print `PASS` and the final summary `✅ All tests passed!`.
+- Submit your implemented code along with the passing test output.
