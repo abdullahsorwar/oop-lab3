@@ -10,7 +10,7 @@ public class Problem4Test {
         c.raiseAll(10.0);
         Assert.assertEquals(132_000.0, c.richest().getPayment(), "P4: raise manager 10%");
         // Verify intern raise
-        Employee e = null;
+        // Employee e = null;
         // find intern by id
         // naive scan via richest test not sufficient; we just check that total matches expected
         // Instead, add new intern and check

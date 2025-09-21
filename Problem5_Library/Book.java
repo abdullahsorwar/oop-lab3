@@ -2,7 +2,7 @@ public class Book {
     private String title;
     private String author;
     private boolean borrowed = false;
-    private Borrower borrower; // null if not borrowed
+    private Borrower borrower = null; // null if not borrowed
 
     public class Borrower {
         private String name;
@@ -22,12 +22,21 @@ public class Book {
     public void borrow(String name, String date){
         // TODO: if already borrowed, throw IllegalStateException
         // else set borrowed=true and create new Borrower
-        throw new UnsupportedOperationException("TODO");
+        if (isBorrowed()) {
+            throw new IllegalStateException("Book is already borrowed");
+        }
+        this.borrowed = true;
+        this.borrower = new Borrower(name, date);
+        return;
+        // throw new UnsupportedOperationException("TODO");
     }
 
     public void giveBack(){
         // TODO: mark returned
-        throw new UnsupportedOperationException("TODO");
+        this.borrowed = false;
+        this.borrower = null;
+        return;
+        // throw new UnsupportedOperationException("TODO");
     }
 
     public String getTitle(){ return title; }
