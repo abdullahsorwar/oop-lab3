@@ -6,6 +6,8 @@ public class Intern extends Employee {
     @Override public double getPayment(){ return stipend; }
     @Override public void raiseByPercent(double pct){
         // TODO: increase stipend by pct%
-        throw new UnsupportedOperationException("TODO");
+        stipend += stipend * pct / 100.0;
+        return;
+        // throw new UnsupportedOperationException("TODO");
     }
 }

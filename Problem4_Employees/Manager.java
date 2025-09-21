@@ -7,6 +7,9 @@ public class Manager extends Employee {
     @Override public double getPayment(){ return base + bonus; }
     @Override public void raiseByPercent(double pct){
         // TODO: increase base and bonus by pct%
-        throw new UnsupportedOperationException("TODO");
+        base += base * pct / 100.0;
+        bonus += bonus * pct / 100.0;
+        return;
+        // throw new UnsupportedOperationException("TODO");
     }
 }
